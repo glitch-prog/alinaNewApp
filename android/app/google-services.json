@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "575210805419",
+    "project_id": "appalina-7b348",
+    "storage_bucket": "appalina-7b348.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:575210805419:android:672e7e0aab8694274c3fee",
+        "android_client_info": {
+          "package_name": "com.alinanewapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "575210805419-0qcd00u88e1gmt2mltnn7u2un0f4v757.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsfYy45tJ17QmFvhGHjz2UwKSJhEEtYmk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "575210805419-0qcd00u88e1gmt2mltnn7u2un0f4v757.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
