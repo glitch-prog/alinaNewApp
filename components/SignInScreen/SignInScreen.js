@@ -83,18 +83,18 @@ const styles = StyleSheet.create({
     // width: '80%',
     padding: 13,
     marginBottom: 24,
-    borderRadius: 10,
+    borderRadius: 15,
   },
 
   btnSign: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FFBB00',
+    backgroundColor: '#3FC6EF',
     width: 320,
     padding: 13,
     marginBottom: 24,
-    borderRadius: 10,
+    borderRadius: 15,
   },
   textBtn: {
     color: '#ffffff',

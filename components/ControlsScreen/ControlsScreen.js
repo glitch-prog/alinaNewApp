@@ -1,22 +1,45 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {NodePlayerView} from 'react-native-nodemediaclient';
-const ControlsScreen = () => {
+import auth from '@react-native-firebase/auth';
+import Icon from 'react-native-vector-icons/dist/FontAwesome';
+
+const ControlsScreen = ({navigation}) => {
   const [playerRef, setPlayerRef] = useState(null);
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState({email: 'hello'});
+
+  // Handle user state changes
+  function onAuthStateChanged(user) {
+    setUser(user);
+    if (initializing) {
+      setInitializing(false);
+    }
+  }
+
+  const handleOnPressSignOut = () =>
+    auth()
+      .signOut()
+      .then(() => {
+        console.log('User signed out!');
+        setUser({email: 'hello'});
+        navigation.navigate('signInScreen');
+      });
+
   useEffect(() => {
-    return () => {
-      if (playerRef) {
-        playerRef.stop();
-      }
-    };
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    console.log(subscriber);
+    return subscriber;
   }, []);
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text>User@gmail.com</Text>
+        <Text style={styles.userString}>{user.email}</Text>
 
-        <TouchableOpacity>
+        <TouchableOpacity
+          style={styles.signOutBtn}
+          onPress={handleOnPressSignOut}>
           <Text>Sign Out</Text>
         </TouchableOpacity>
       </View>
@@ -37,15 +60,28 @@ const ControlsScreen = () => {
 
       <View style={styles.controlsBtnSection}>
         <TouchableOpacity style={styles.controlsBtn}>
-          <Text style={styles.controlsBtnText}>Left</Text>
+          {/* <Text style={styles.controlsBtnText}>Left</Text> */}
+          <Icon
+            style={{marginRight: 7}}
+            name="chevron-left"
+            size={40}
+            color="white"
+          />
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.screenshotBtn}>
+          {/* <Text style={styles.controlsBtnText}>Screen</Text> */}
+          <Icon name="camera" size={40} color="white" />
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.controlsBtn}>
-          <Text style={styles.controlsBtnText}>Screen</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.controlsBtn}>
-          <Text style={styles.controlsBtnText}>Right</Text>
+          {/* <Text style={styles.controlsBtnText}>Right</Text> */}
+          <Icon
+            style={{marginLeft: 7}}
+            name="chevron-right"
+            size={40}
+            color="white"
+          />
         </TouchableOpacity>
       </View>
       <TouchableOpacity style={styles.galleryBtn}>
@@ -70,6 +106,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
+    alignItems: 'center',
   },
   controlsBtnSection: {
     width: 320,
@@ -87,18 +124,39 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 50,
-    backgroundColor: '#FFBB00',
+    backgroundColor: '#FFCF87',
+  },
+
+  screenshotBtn: {
+    backgroundColor: '#B680FF',
+    width: 75,
+    height: 75,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 50,
+  },
+
+  signOutBtn: {
+    backgroundColor: '#ffcf87',
+    padding: 10,
+    borderRadius: 15,
   },
 
   controlsBtnText: {
     color: '#ffffff',
   },
 
+  userString: {
+    fontSize: 16,
+    color: '#000000',
+  },
+
   galleryBtn: {
     padding: 13,
-    borderRadius: 10,
+    borderRadius: 15,
     width: '80%',
-    backgroundColor: 'blue',
+    backgroundColor: '#3FC6EF',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
